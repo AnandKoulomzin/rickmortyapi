@@ -9,7 +9,7 @@ import { title } from 'process';
 export class CharacterService {
 
 
-    constructor(@InjectModel('character') private readonly characterModel: Model<Character>) { }
+    constructor(@InjectModel('Character') private readonly characterModel: Model<Character>) { }
 
     async insertCharacter(name: string, death: string, species: string, relation: string, lastEpisode: string,) {
         const newCharacter = new this.characterModel({name: name, death: death, species: species, relationToRick: relation, lastEpisodePresent: lastEpisode });
