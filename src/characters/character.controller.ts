@@ -23,6 +23,11 @@ export class CharacterController {
         const character  = await this.charactersService.getCharacterById(charId);
         return character;
     }
+    @Get('death/alive')
+    async getAliveCharacters() {
+        const characters = await this.charactersService.getAliveCharacters();
+        return characters;
+    }
 
     @Patch(':id')
     async updateCharacterById(@Param('id') charId: string, @Body('name') charName: string, @Body('death') charDeath: string, @Body('species') charSpecies: string, @Body('relationToRick') charRelation: string, @Body('lastEpisodePresent') charLastEpisode: string) {
