@@ -24,14 +24,19 @@ export class CharacterService {
 
     async getAliveCharacters() {
         const characters = await this.characterModel.find().exec();
-        for (let i = 0; i < characters.length; i++) {
-            if (characters[i].death==="alive"){
-                
-            } else {
-                characters.splice(i,1)
-            }
+        const result = characters.filter(checkDeath);
+
+        function checkDeath(death) {
+            return death = "alive";
         }
-        return characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+        // for (let i = 0; i < characters.length; i++) {
+        //     if (characters[i].death==="alive"){
+                
+        //     } else {
+        //         characters.splice(i,1)
+        //         }
+        // }
+        // return characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
     }
 
     async getCharacterById(characterId: string) {

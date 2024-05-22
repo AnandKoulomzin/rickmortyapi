@@ -24,7 +24,7 @@ export class CharacterController {
         return character;
     }
     @Get('death/alive')
-    async getAliveCharacters() {
+    async getAliveCharacters(@Param("death") charDeath: string,) {
         const characters = await this.charactersService.getAliveCharacters();
         return characters;
     }
