@@ -24,8 +24,14 @@ export class CharacterController {
         return character;
     }
     @Get('death/alive')
-    async getAliveCharacters(@Param("death") charDeath: string,) {
+    async getAliveCharacters() {
         const characters = await this.charactersService.getAliveCharacters();
+        return characters;
+    }
+
+    @Get('death/dead')
+    async getDeadCharacters() {
+        const characters = await this.charactersService.getDeadCharacters();
         return characters;
     }
 
@@ -39,6 +45,12 @@ export class CharacterController {
     async deleteCharacterById(@Param('id') charId: string,) {
         await this.charactersService.deleteCharacterById(charId);
         return null;
-}
+    }
+
+    @Delete()
+    async deleteAllCharacters() {
+        await this.charactersService.deleteAllCharacters();
+        return null;
+    }
 
 }

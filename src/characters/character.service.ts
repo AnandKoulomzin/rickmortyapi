@@ -24,19 +24,20 @@ export class CharacterService {
 
     async getAliveCharacters() {
         const characters = await this.characterModel.find().exec();
-        const result = characters.filter(checkDeath);
+        const result = characters.filter((e)=>e.death==="Alive" || e.death==="alive");
 
-        function checkDeath(death) {
-            return death = "alive";
-        }
-        // for (let i = 0; i < characters.length; i++) {
-        //     if (characters[i].death==="alive"){
-                
-        //     } else {
-        //         characters.splice(i,1)
-        //         }
-        // }
-        // return characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+        console.log("hi " + result);
+
+        return result.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+    }
+
+    async getDeadCharacters() {
+        const characters = await this.characterModel.find().exec();
+        const result = characters.filter((e)=>e.death!=="Alive");
+
+        console.log("hi " + result);
+
+        return result.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
     }
 
     async getCharacterById(characterId: string) {
@@ -70,6 +71,14 @@ export class CharacterService {
         const result = await this.characterModel.deleteOne({ _id: characterId }).exec();
         if (result.deletedCount === 0) {
             throw new NotFoundException('character does not exist');
+        }
+    }
+
+    async deleteAllCharacters() {
+        const characters = await this.characterModel.find().exec();
+        for (let i = 0; i < characters.length; i++) {
+            const p = characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+            characters[i].deleteOne(char.id);
         }
     }
 
