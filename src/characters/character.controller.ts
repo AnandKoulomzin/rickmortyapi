@@ -23,6 +23,13 @@ export class CharacterController {
         const character  = await this.charactersService.getCharacterById(charId);
         return character;
     }
+
+    @Get('death/human')
+    async getHumanCharacters() {
+        const characters = await this.charactersService.getHumanCharacters();
+        return characters;
+    }
+
     @Get('death/alive')
     async getAliveCharacters() {
         const characters = await this.charactersService.getAliveCharacters();

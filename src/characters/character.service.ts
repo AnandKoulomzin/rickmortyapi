@@ -22,6 +22,15 @@ export class CharacterService {
         return characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
     }
 
+    async getHumanCharacters() {
+        const characters = await this.characterModel.find().exec();
+        const result = characters.filter((e)=>e.species==="Human" || e.death==="human");
+
+        console.log("hi " + result);
+
+        return result.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+    }
+
     async getAliveCharacters() {
         const characters = await this.characterModel.find().exec();
         const result = characters.filter((e)=>e.death==="Alive" || e.death==="alive");
@@ -78,7 +87,6 @@ export class CharacterService {
         const characters = await this.characterModel.find().exec();
         for (let i = 0; i < characters.length; i++) {
             const p = characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
-            characters[i].deleteOne(char.id);
         }
     }
 
