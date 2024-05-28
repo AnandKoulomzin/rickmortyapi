@@ -30,6 +30,12 @@ export class CharacterController {
         return character;
     }
 
+    @Get('get/random')
+    async getRandomCharacter() {
+        const character = await this.charactersService.getRandomCharacter();
+        return character;
+    }
+
     @Get('species/human')
     async getHumanCharacters() {
         const characters = await this.charactersService.getHumanCharacters();
