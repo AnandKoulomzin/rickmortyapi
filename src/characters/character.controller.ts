@@ -24,7 +24,13 @@ export class CharacterController {
         return character;
     }
 
-    @Get('death/human')
+    @Get('name/:name')
+    async getCharacterByName(@Param('name') charName: string,) {
+        const character  = await this.charactersService.getCharacterByName(charName);
+        return character;
+    }
+
+    @Get('species/human')
     async getHumanCharacters() {
         const characters = await this.charactersService.getHumanCharacters();
         return characters;

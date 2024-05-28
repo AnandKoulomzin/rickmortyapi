@@ -22,6 +22,12 @@ export class CharacterService {
         return characters.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
     }
 
+    async getCharacterByName(characterName: string) {
+        const characters = await this.characterModel.find().exec();
+        const result = characters.filter((e)=>e.name===characterName);
+        return result.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));
+    }
+
     async getHumanCharacters() {
         const characters = await this.characterModel.find().exec();
         const result = characters.filter((e)=>e.species==="Human" || e.death==="human");
