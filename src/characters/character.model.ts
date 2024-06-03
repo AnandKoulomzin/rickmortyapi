@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const CharacterSchema = new mongoose.Schema({
+export const CharacterSchema = new mongoose.Schema({ //these are each of the variables for each character
     name: {type: String, required:true},
     death: {type: String, required:true},
     species: {type: String, required:true},

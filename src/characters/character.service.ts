@@ -24,12 +24,12 @@ export class CharacterService {
 
     async getRandomCharacter() {
         const characters = await this.characterModel.find().exec();
-        var randomIndex = Math.floor(Math.random()*characters.length);
+        var randomIndex = Math.floor(Math.random()*characters.length); //only can be from as many of the possible characters
         const character = await (await this.findCharacter(characters[randomIndex].id));
         return { id: character.id, name: character.name, death: character.death, species: character.species, relationToRick: character.relationToRick, lastEpisodePresent: character.lastEpisodePresent, };
     }
 
-    async getCharacterByName(characterName: string) {
+    async getCharacterByName(characterName: string) { //you can input any name
         const characters = await this.characterModel.find().exec();
         const result = characters.filter((e)=>e.name===characterName);
         return result.map(char => ({ id: char.id, name: char.name, death: char.death, species: char.species, relationToRick: char.relationToRick, lastEpisodePresent: char.lastEpisodePresent }));

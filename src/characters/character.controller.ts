@@ -30,7 +30,7 @@ export class CharacterController {
         return character;
     }
 
-    @Get('get/random')
+    @Get('get/random') //have to add "get/" so that it doesnt think its an id
     async getRandomCharacter() {
         const character = await this.charactersService.getRandomCharacter();
         return character;
